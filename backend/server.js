@@ -39,10 +39,23 @@ app.post('/add-item',(req,res)=>{
     db.query(`insert into todoItems(itemDescription) values('${req.body.text}')`,(err, results) => {
         if (err) {
             console.error('Error occured', err);
+            return
         }
         console.log('Data inserted successfully', results);
         })
         res.send("added successfully");
+})
+app.put('/edit-items',(req,res)=>{
+    console.log("Line 54:", req.body);
+    db.query(`update todoItems set itemDescription="${req.body.itemDescription}" where ID=${req.body.ID};`,(err, results) => {
+        if (err) {
+            console.error('Error occured', err);
+            return
+        }
+        console.log('Data inserted successfully', results);
+        })
+        res.send("success");
+
 })
 app.listen(3000,()=>{
     console.log('Server is running on port 3000');
